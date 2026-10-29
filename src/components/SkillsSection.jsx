@@ -1,161 +1,130 @@
-import { useState } from "react";
-import { Cpu, Layout, Server, Database, Wrench } from "lucide-react";
+import {
+  Code2,
+  Globe,
+  Database,
+  Wrench,
+  Smartphone,
+  BookOpen,
+} from "lucide-react";
+
+const skillGroups = [
+  {
+    title: "Frontend Development",
+    icon: Globe,
+    skills: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    title: "Backend & Database",
+    icon: Database,
+    skills: [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "MySQL",
+      "Firebase",
+    ],
+  },
+  {
+    title: "Programming Languages",
+    icon: Code2,
+    skills: ["C", "C++", "Java", "JavaScript", "TypeScript", "Dart"],
+  },
+  {
+    title: "Mobile Development",
+    icon: Smartphone,
+    skills: ["Flutter", "Dart", "Android Development"],
+  },
+  {
+    title: "Tools & Platforms",
+    icon: Wrench,
+    skills: [
+      "Git",
+      "GitHub",
+      "Linux",
+      "Jenkins",
+      "n8n",
+      "Zapier",
+      "GoHighLevel",
+    ],
+  },
+];
 
 export default function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const categories = [
-    { id: "all", label: "All Skills" },
-    { id: "frontend", label: "Frontend", icon: Layout },
-    { id: "backend", label: "Backend & SaaS", icon: Server },
-    { id: "database", label: "Databases & Data", icon: Database },
-    { id: "tools", label: "DevOps & Tools", icon: Wrench },
-  ];
-
-  const skillGroups = [
-    {
-      category: "frontend",
-      title: "Frontend Engineering",
-      icon: Layout,
-      color: "from-cyan-500/20 to-blue-500/10",
-      borderColor: "hover:border-cyan-500/40",
-      skills: [
-        { name: "React 19", level: "Expert", desc: "Hooks, Server/Client components, Concurrent rendering" },
-        { name: "JavaScript (ES6+)", level: "Advanced", desc: "Async/Await, Closures, DOM APIs, Modular JS" },
-        { name: "Tailwind CSS v4", level: "Expert", desc: "Modern styling, design systems, dark modes" },
-        { name: "GSAP & ScrollTrigger", level: "Advanced", desc: "Canvas sequences, scrub animations, pinning" },
-        { name: "Framer Motion", level: "Advanced", desc: "Smooth layout transitions, spring physics, gesture UI" },
-        { name: "Responsive UI/UX", level: "Expert", desc: "Mobile-first layouts, accessible markup, typography" },
-      ],
-    },
-    {
-      category: "backend",
-      title: "Backend & Multi-Tenant SaaS",
-      icon: Server,
-      color: "from-emerald-500/20 to-teal-500/10",
-      borderColor: "hover:border-emerald-500/40",
-      skills: [
-        { name: "Multi-Tenant Architecture", level: "Specialist", desc: "Tenant data isolation, domain routing, scalability" },
-        { name: "Node.js & Express", level: "Advanced", desc: "Robust microservices, modular middleware, async handlers" },
-        { name: "RESTful API Design", level: "Expert", desc: "Clean endpoints, payload validation, status codes" },
-        { name: "Authentication & RBAC", level: "Advanced", desc: "JWT, session security, multi-role permissions" },
-        { name: "Data Pipelines & Export", level: "Advanced", desc: "CSV generation, automated lead management workflows" },
-        { name: "API Security & Rate Limiting", level: "Advanced", desc: "CORS, sanitize inputs, attack mitigation" },
-      ],
-    },
-    {
-      category: "database",
-      title: "Databases & Data Analytics",
-      icon: Database,
-      color: "from-purple-500/20 to-indigo-500/10",
-      borderColor: "hover:border-purple-500/40",
-      skills: [
-        { name: "MongoDB & Mongoose", level: "Advanced", desc: "Document schemas, aggregations, indexing" },
-        { name: "PostgreSQL & SQL", level: "Proficient", desc: "Relational data schema, joins, transactions" },
-        { name: "Recharts & Visual Data", level: "Advanced", desc: "Interactive charts, trend analysis dashboards" },
-        { name: "State Architecture", level: "Advanced", desc: "React Context, LocalStorage persistence, optimistics" },
-      ],
-    },
-    {
-      category: "tools",
-      title: "DevOps, Tools & Workflow",
-      icon: Wrench,
-      color: "from-amber-500/20 to-orange-500/10",
-      borderColor: "hover:border-amber-500/40",
-      skills: [
-        { name: "Git & GitHub", level: "Expert", desc: "Version control, branching, PR reviews, merge workflows" },
-        { name: "Vite & Sharp", level: "Advanced", desc: "Ultra-fast bundling, frame optimization scripts" },
-        { name: "Linux & Bash", level: "Advanced", desc: "Terminal automation, shell scripting, server administration" },
-        { name: "Postman", level: "Advanced", desc: "API testing, environment variables, documentation" },
-      ],
-    },
-  ];
-
-  const filteredGroups =
-    activeCategory === "all"
-      ? skillGroups
-      : skillGroups.filter((group) => group.category === activeCategory);
-
   return (
-    <section id="skills" className="py-24 bg-zinc-950 relative border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
-            <Cpu className="w-3.5 h-3.5" />
-            Technical Arsenal
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">Technologies</span>
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-400">
-            A comprehensive toolkit designed for building production-grade web systems, high-speed interfaces, and resilient SaaS architectures.
+    <section id="skills" className="relative px-5 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+        {/* Section Heading */}
+        <div className="mb-14 text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
+            Technical Toolkit
           </p>
 
-          {/* Interactive Filter Pills */}
-          <div className="mt-8 flex flex-wrap justify-center gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
-                  activeCategory === cat.id
-                    ? "bg-cyan-400 text-black shadow-lg shadow-cyan-400/25 scale-105"
-                    : "bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 border border-white/10"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+            Skills & <span className="text-gradient">Technologies</span>
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
+            My technical toolkit spans frontend and backend development,
+            databases, programming languages, mobile development, and modern
+            development tools. I apply these technologies through hands-on
+            practice and project development.
+          </p>
         </div>
 
-        {/* Skill Groups Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredGroups.map((group, idx) => {
+        {/* Skill Groups */}
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {skillGroups.map((group) => {
             const Icon = group.icon;
+
             return (
-              <div
-                key={idx}
-                className={`rounded-2xl bg-zinc-900/60 border border-white/10 p-6 sm:p-8 backdrop-blur-sm transition-all duration-300 ${group.borderColor} group`}
+              <article
+                key={group.title}
+                className="glass-panel group rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.06)]"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6" />
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3">
+                    <Icon className="h-5 w-5 text-cyan-400" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                      {group.title}
-                    </h3>
-                    <p className="text-xs text-zinc-400">
-                      {group.skills.length} core competencies
-                    </p>
-                  </div>
+
+                  <h3 className="text-lg font-semibold text-white">
+                    {group.title}
+                  </h3>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  {group.skills.map((skill, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className="p-3.5 rounded-xl bg-black/40 border border-white/5 hover:border-cyan-500/20 hover:bg-black/60 transition-colors"
+                <div className="flex flex-wrap gap-2.5">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-lg border border-cyan-400/15 bg-cyan-400/[0.06] px-3 py-2 text-sm font-medium text-gray-200 transition-all duration-200 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-sm text-zinc-200">
-                          {skill.name}
-                        </span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-                          {skill.level}
-                        </span>
-                      </div>
-                      <p className="text-xs text-zinc-400 mt-1.5 leading-snug">
-                        {skill.desc}
-                      </p>
-                    </div>
+                      {skill}
+                    </span>
                   ))}
                 </div>
-              </div>
+              </article>
             );
           })}
+        </div>
+
+        {/* Professional Note */}
+        <div className="mt-10 flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-5 text-center sm:flex-row sm:justify-center sm:text-left">
+          <BookOpen className="h-5 w-5 shrink-0 text-cyan-400" />
+
+          <p className="text-sm leading-6 text-gray-400">
+            <span className="font-medium text-gray-200">
+              Practical Approach:
+            </span>{" "}
+            I strengthen my technical skills through hands-on coding,
+            application development, and continuous improvement.
+          </p>
         </div>
       </div>
     </section>

@@ -23,13 +23,13 @@ export default function AboutContent({ progress }) {
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-semibold mb-3">
           <Code2 className="w-3.5 h-3.5" />
-          Philosophy & Vision
+          About Me
         </div>
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight">
-          I build solutions to real-world problems through code.
+          I turn what I study into working web apps.
         </h2>
         <p className="mt-4 text-base sm:text-xl text-zinc-300 font-light">
-          Translating complex business requirements into fluid, accessible, and resilient digital architectures.
+          A Software Engineering student growing into full stack web development.
         </p>
       </motion.div>
 
@@ -40,18 +40,18 @@ export default function AboutContent({ progress }) {
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-400/30 text-teal-300 text-xs font-semibold mb-3">
           <Rocket className="w-3.5 h-3.5" />
-          Engineer & Instructor
+          Software Engineering Student
         </div>
         <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-snug">
-          Full Stack Developer & Technical Web Instructor.
+          Full stack web development, one project at a time.
         </h3>
         <p className="mt-4 text-sm sm:text-lg text-zinc-300 leading-relaxed">
-          Specializing in scalable multi-tenant SaaS platforms, modern web architecture, and performant user interfaces, with a commitment to mentoring the next generation of engineers.
+          I study Software Engineering at UFTB and build web apps with React and Next.js. I'm also learning Flutter to understand mobile development.
         </p>
         <div className="mt-5 flex flex-wrap gap-2 text-xs text-zinc-400">
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Multi-Tenant SaaS</span>
+          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Full Stack Direction</span>
           <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">React & Node.js</span>
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Tech Mentorship</span>
+          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Learning Android development</span>
         </div>
       </motion.div>
 
@@ -65,14 +65,14 @@ export default function AboutContent({ progress }) {
             Dive Deeper
           </p>
           <h4 className="text-xl sm:text-2xl font-bold text-white">
-            Explore Skills, Tech & Featured Projects
+            Explore Skills, Learning & Featured Projects
           </h4>
         </div>
         <a
           href="#skills"
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 px-8 py-3.5 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95"
         >
-          <span>Explore Skills & Tech</span>
+          <span>Explore Skills & Learning</span>
           <ArrowDown className="w-4 h-4" />
         </a>
       </motion.div>

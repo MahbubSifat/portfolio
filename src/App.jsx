@@ -3,13 +3,16 @@ import ScrollSequence from "./components/ScrollSequence";
 import HeroContent from "./components/HeroContent";
 import AboutContent from "./components/AboutContent";
 import Navbar from "./components/Navbar";
-import StatsSection from "./components/StatsSection";
+
+// import StatsSection from "./components/StatsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
-import ServicesSection from "./components/ServicesSection";
+// import ServicesSection from "./components/ServicesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import AboutSection from "./components/AboutSection";
+import EducationSection from "./components/EducationSection";
 
 export default function App() {
   return (
@@ -20,20 +23,18 @@ export default function App() {
 
         {/* 1. Hero Canvas Sequence */}
         <div id="hero" className="relative">
-          <ScrollSequence name="hero" frameCount={144} scrollLength={4000}>
+          <ScrollSequence name="hero" frameCount={96} scrollLength={2800}>
             {(progress) => <HeroContent progress={progress} />}
           </ScrollSequence>
         </div>
 
-        {/* 2. Key Metrics & Impact */}
-        <StatsSection />
+        {/* 2. Key Metrics & Impact
+        <StatsSection /> */}
 
-        {/* 3. Work Experience & Leadership */}
-        <ExperienceSection />
 
         {/* 4. About Canvas Sequence (Moved after Work Experience) */}
         <div id="about" className="relative">
-          <ScrollSequence name="about" frameCount={96} scrollLength={3500}>
+          <ScrollSequence name="about" frameCount={192} scrollLength={3500}>
             {(progress) => <AboutContent progress={progress} />}
           </ScrollSequence>
         </div>
@@ -41,11 +42,14 @@ export default function App() {
         {/* 5. Technical Stack & Skills */}
         <SkillsSection />
 
+        {/* 3. Work Experience & Leadership */}
+        <ExperienceSection />
+
         {/* 6. Featured Projects */}
         <ProjectsSection />
 
-        {/* 7. Solutions & Services */}
-        <ServicesSection />
+        {/* 7. Solutions & Services
+        <ServicesSection /> */}
 
         {/* 8. Contact & Inquiry */}
         <ContactSection />

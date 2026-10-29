@@ -1,169 +1,185 @@
 import { useState } from "react";
-import { FolderGit2, ExternalLink, Check, ArrowUpRight } from "lucide-react";
+import {
+  FolderGit2,
+  ExternalLink,
+  ArrowUpRight,
+} from "lucide-react";
 import { GithubIcon } from "./Icons";
+
+const projects = [
+  {
+    id: "dev-stack-builder",
+    title: "Dev Stack Builder",
+    category: "react",
+    categoryLabel: "React Application",
+    tagline: "A developer-focused web application",
+    description:
+      "A React application built with Vite, Tailwind CSS, and DaisyUI. The project is part of my practical frontend development journey.",
+    features: [
+      "Built with React and Vite",
+      "Technology information organized in JSON data",
+      "Styled using Tailwind CSS and DaisyUI",
+    ],
+    tech: [
+      "React",
+      "Vite",
+      "JavaScript",
+      "Tailwind CSS",
+      "DaisyUI",
+    ],
+    github:
+      "https://github.com/MahbubSifat/dev-stack-builder",
+    demo:
+      "https://dev-stack-builder-eosin.vercel.app/",
+    accent: "from-cyan-500/20 to-blue-500/5",
+    badgeColor:
+      "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
+  },
+  {
+    id: "fitlog",
+    title: "Fitlog",
+    category: "nextjs",
+    categoryLabel: "Next.js Project",
+    tagline: "A project built with Next.js",
+    description:
+      "A Next.js project developed as part of my practical web development learning. Explore the repository and live deployment for implementation details.",
+    features: [
+      "Built with Next.js",
+      "Source code available on GitHub",
+      "Live deployment available",
+    ],
+    tech: ["Next.js", "React", "JavaScript"],
+    github: "https://github.com/MahbubSifat/fitlog",
+    demo: "https://fitlog-two-self.vercel.app/",
+    accent: "from-teal-500/20 to-emerald-500/5",
+    badgeColor:
+      "bg-teal-500/10 text-teal-300 border-teal-500/30",
+  },
+  {
+    id: "bazar-dor",
+    title: "Bazar Dor",
+    category: "nextjs",
+    categoryLabel: "Authentication Project",
+    tagline: "A Next.js project featuring authentication",
+    description:
+      "A Next.js authentication project. Visit the source code or live deployment to explore the implementation.",
+    features: [
+      "Built with Next.js",
+      "Authentication-focused project",
+      "Source code and live deployment available",
+    ],
+    tech: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "Authentication",
+    ],
+    github:
+      "https://github.com/MahbubSifat/B14-A7-Bazar-Dor",
+    demo:
+      "https://b14-a7-bazar-dor-wemq.vercel.app/",
+    accent: "from-blue-500/20 to-indigo-500/5",
+    badgeColor:
+      "bg-blue-500/10 text-blue-300 border-blue-500/30",
+  },
+];
+
+const filters = [
+  { id: "all", label: "All Projects" },
+  { id: "react", label: "React" },
+  { id: "nextjs", label: "Next.js" },
+];
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState("all");
 
-  const projects = [
-    {
-      id: "saas-hub",
-      title: "Multi-Tenant SaaS Engine & Leads Hub",
-      category: "saas",
-      categoryLabel: "Multi-Tenant SaaS",
-      tagline: "High-scale multi-tenant client pipeline & lead management suite",
-      description:
-        "Engineered a full-scale multi-tenant SaaS application that isolates tenant data, provides automated lead capture pipelines, supports real-time activity metrics, and handles high-volume CSV exports.",
-      features: [
-        "Multi-tenant database schema with strict data isolation",
-        "Lead ingestion pipeline with automated status transitions",
-        "Role-based permission matrix (Superadmin, Tenant Admin, Agent)",
-        "Instant CSV export engine for data reporting and analysis",
-      ],
-      tech: ["React 19", "Node.js", "Express", "MongoDB", "Multi-Tenant SaaS", "Tailwind CSS"],
-      github: "https://github.com/Fahim-Prodhan",
-      demo: "https://github.com/Fahim-Prodhan",
-      accent: "from-cyan-500/20 to-blue-500/5",
-      badgeColor: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
-    },
-    {
-      id: "studyflow",
-      title: "StudyFlow - Collaborative Study & Task Platform",
-      category: "fullstack",
-      categoryLabel: "Productivity Platform",
-      tagline: "Interactive productivity dashboard with Recharts analytics",
-      description:
-        "A feature-packed study companion and task tracking application designed for learners. Offers visual progress analytics, session goal tracking, and intuitive task management.",
-      features: [
-        "Interactive analytics dashboards using Recharts for visual progress",
-        "Dynamic task categorization with status updates and filters",
-        "Responsive UI built with React 19, Tailwind CSS, and DaisyUI",
-        "Toast notification feedback system for seamless user interactions",
-      ],
-      tech: ["React 19", "Recharts", "React Router", "Tailwind CSS", "DaisyUI", "REST APIs"],
-      github: "https://github.com/Fahim-Prodhan/study-flow",
-      demo: "https://github.com/Fahim-Prodhan/study-flow",
-      accent: "from-teal-500/20 to-emerald-500/5",
-      badgeColor: "bg-teal-500/10 text-teal-300 border-teal-500/30",
-    },
-    {
-      id: "library",
-      title: "Multi-Tenant Library Management System",
-      category: "fullstack",
-      categoryLabel: "Management System",
-      tagline: "Digital cataloging, borrowing lifecycle & inventory tracking",
-      description:
-        "Comprehensive web platform for managing library collections, member records, and book loans. Built with robust REST APIs and instant UI feedback.",
-      features: [
-        "Real-time catalog searching and multi-category book filtering",
-        "Borrowing lifecycle workflow with issue and return timestamps",
-        "Instant feedback notifications via React Hot Toast",
-        "Clean, responsive interface optimized for desktop and mobile",
-      ],
-      tech: ["React 19", "React Router", "Tailwind CSS", "React Hot Toast", "REST APIs"],
-      github: "https://github.com/Fahim-Prodhan/library-management-react-frontend",
-      demo: "https://github.com/Fahim-Prodhan/library-management-react-frontend",
-      accent: "from-blue-500/20 to-indigo-500/5",
-      badgeColor: "bg-blue-500/10 text-blue-300 border-blue-500/30",
-    },
-    {
-      id: "animated-portfolio",
-      title: "Interactive Canvas Frame-Scrub Portfolio",
-      category: "animation",
-      categoryLabel: "Creative Development",
-      tagline: "60FPS scroll-driven canvas animation with Lenis and GSAP",
-      description:
-        "The very site you are browsing right now! Features hardware-accelerated canvas frame sequencing, smooth inertia scrolling with Lenis, and responsive multi-resolution frame switching.",
-      features: [
-        "Optimized 144+ WebP frame playback linked to scroll distance",
-        "Virtual smooth scrolling powered by Lenis and GSAP ScrollTrigger",
-        "Sharp automation script for multi-device frame downsampling",
-        "Modern dark-glass interface with Framer Motion transitions",
-      ],
-      tech: ["React 19", "GSAP ScrollTrigger", "Lenis", "Motion", "Tailwind CSS", "Sharp"],
-      github: "https://github.com/Fahim-Prodhan",
-      demo: "#",
-      accent: "from-purple-500/20 to-pink-500/5",
-      badgeColor: "bg-purple-500/10 text-purple-300 border-purple-500/30",
-    },
-  ];
-
   const filteredProjects =
     filter === "all"
       ? projects
-      : projects.filter((p) => p.category === filter);
+      : projects.filter(
+          (project) => project.category === filter
+        );
 
   return (
-    <section id="projects" className="py-24 bg-black relative border-t border-white/5">
-      {/* Background radial glow */}
+    <section
+      id="projects"
+      className="py-24 bg-black relative border-t border-white/5"
+    >
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
             <FolderGit2 className="w-3.5 h-3.5" />
-            Selected Portfolio
+            Selected Work
           </div>
+
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">Projects</span>
+            Featured{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">
+              Projects
+            </span>
           </h2>
+
           <p className="mt-4 text-base sm:text-lg text-zinc-400">
-            A showcase of production-ready SaaS architectures, interactive platforms, and modern web applications built by MD Fahim Prodhan.
+            A selection of projects I have built while developing
+            my skills in modern web development.
           </p>
 
-          {/* Filter Buttons */}
           <div className="mt-8 flex flex-wrap justify-center gap-2">
-            {[
-              { id: "all", label: "All Projects" },
-              { id: "saas", label: "Multi-Tenant SaaS" },
-              { id: "fullstack", label: "Full-Stack Web" },
-              { id: "animation", label: "Creative & Animation" },
-            ].map((btn) => (
+            {filters.map((item) => (
               <button
-                key={btn.id}
-                onClick={() => setFilter(btn.id)}
+                key={item.id}
+                type="button"
+                onClick={() => setFilter(item.id)}
+                aria-pressed={filter === item.id}
                 className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
-                  filter === btn.id
+                  filter === item.id
                     ? "bg-cyan-400 text-black shadow-lg shadow-cyan-400/25 scale-105"
                     : "bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 border border-white/10"
                 }`}
               >
-                {btn.label}
+                {item.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {filteredProjects.map((project) => (
-            <div
+            <article
               key={project.id}
-              className="flex flex-col justify-between rounded-3xl bg-zinc-900/60 border border-white/10 overflow-hidden backdrop-blur-sm hover:border-cyan-500/40 hover:bg-zinc-900/90 transition-all duration-300 group shadow-2xl"
+              className="flex flex-col rounded-3xl bg-zinc-900/60 border border-white/10 overflow-hidden backdrop-blur-sm hover:border-cyan-500/40 hover:bg-zinc-900/90 transition-all duration-300 group shadow-2xl"
             >
-              {/* Card Header & Preview Banner */}
-              <div className={`p-6 sm:p-8 bg-gradient-to-br ${project.accent} border-b border-white/5 relative`}>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${project.badgeColor}`}>
+              <div
+                className={`p-6 sm:p-8 bg-gradient-to-br ${project.accent} border-b border-white/5`}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                  <span
+                    className={`text-xs font-semibold px-3 py-1 rounded-full border ${project.badgeColor}`}
+                  >
                     {project.categoryLabel}
                   </span>
+
                   <div className="flex items-center gap-2">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="p-2 rounded-full bg-black/40 text-zinc-300 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
+                      aria-label={`${project.title} GitHub repository`}
                       title="GitHub Repository"
+                      className="p-2 rounded-full bg-black/40 text-zinc-300 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
                     >
                       <GithubIcon className="w-4 h-4" />
                     </a>
+
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`${project.title} live demo`}
+                      title="Live Demo"
                       className="p-2 rounded-full bg-black/40 text-zinc-300 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
-                      title="Project Demo"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -173,59 +189,72 @@ export default function ProjectsSection() {
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
                   {project.title}
                 </h3>
+
                 <p className="mt-2 text-sm text-cyan-200/80 font-medium">
                   {project.tagline}
                 </p>
               </div>
 
-              {/* Card Body */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between gap-6">
                 <div>
                   <p className="text-sm text-zinc-300 leading-relaxed">
                     {project.description}
                   </p>
 
-                  {/* Key Features */}
                   <div className="mt-5 space-y-2.5">
-                    <div className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-                      Key Capabilities:
-                    </div>
-                    {project.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
-                        <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                        <span>{feat}</span>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                      Project Highlights
+                    </h4>
+
+                    {project.features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300"
+                      >
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                        <span>{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Tech Chips & CTA */}
                 <div>
                   <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
-                    {project.tech.map((t) => (
+                    {project.tech.map((tech) => (
                       <span
-                        key={t}
+                        key={tech}
                         className="text-[11px] px-2.5 py-1 rounded-md bg-white/5 text-zinc-300 border border-white/5"
                       >
-                        {t}
+                        {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between">
+                  <div className="mt-6 flex flex-wrap items-center gap-5">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
                     >
-                      <span>Explore Repository & Details</span>
+                      <GithubIcon className="w-4 h-4" />
+                      View Source Code
                       <ArrowUpRight className="w-4 h-4" />
+                    </a>
+
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-zinc-300 hover:text-white transition-colors"
+                    >
+                      Live Demo
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

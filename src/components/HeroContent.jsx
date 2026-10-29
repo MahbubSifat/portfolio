@@ -1,88 +1,159 @@
 import { motion, useTransform } from "motion/react";
-import { ArrowDown } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon, FacebookIcon } from "./Icons";
+import { LINKS, RESUME_URL } from "../data/links";
+
+function ResumeButton({ className }) {
+  // Resume URL না থাকলে button দেখানো হবে না।
+  if (!RESUME_URL) return null;
+
+  return (
+    <a
+      href={RESUME_URL}
+      target="_blank"
+      rel="noreferrer"
+      className={className}
+    >
+      <FileText className="w-4 h-4" />
+      <span>View Resume</span>
+    </a>
+  );
+}
 
 export default function HeroContent({ progress }) {
-  // Title stays visible in initial scroll then fades out
   const titleOpacity = useTransform(progress, [0, 0.18], [1, 0]);
   const titleY = useTransform(progress, [0, 0.18], [0, -80]);
   const titleScale = useTransform(progress, [0, 0.18], [1, 0.92]);
 
-  // Bottom scroll prompt fades out early
+  // Intro fade হয়ে গেলে invisible links যেন click করা না যায়।
+  const introPointer = useTransform(progress, (v) =>
+    v < 0.12 ? "auto" : "none"
+  );
+
   const scrollPromptOpacity = useTransform(progress, [0, 0.08], [1, 0]);
 
-  // CTA appears near the end of hero sequence
   const ctaOpacity = useTransform(progress, [0.75, 0.92], [0, 1]);
   const ctaY = useTransform(progress, [0.75, 0.92], [30, 0]);
+  const ctaPointer = useTransform(progress, (v) =>
+    v > 0.8 ? "auto" : "none"
+  );
+
+  const socials = [
+    { label: "GitHub", href: LINKS.github, Icon: GithubIcon },
+    { label: "LinkedIn", href: LINKS.linkedin, Icon: LinkedinIcon },
+    { label: "Facebook", href: LINKS.facebook, Icon: FacebookIcon },
+    {
+      label: "Email",
+      href: LINKS.email ? `mailto:${LINKS.email}` : null,
+      Icon: Mail,
+    },
+  ].filter((social) => social.href);
+
+  const introClass =
+    "inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-zinc-300";
+
+  const buttonClass =
+    "inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 font-medium text-white backdrop-blur-md transition hover:scale-105 hover:bg-white/20 active:scale-95";
 
   return (
     <>
-      {/* Centered Initial Hero Content */}
+      {/* Main introduction */}
       <motion.div
-        style={{ opacity: titleOpacity, y: titleY, scale: titleScale }}
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center pointer-events-none"
+        style={{
+          opacity: titleOpacity,
+          y: titleY,
+          scale: titleScale,
+        }}
+        className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center"
       >
-        {/* Availability Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-cyan-400/30 backdrop-blur-md mb-6 shadow-lg shadow-cyan-500/10">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs sm:text-sm font-medium tracking-wide text-cyan-300">
-            Full-Stack Software Engineer • Web Instructor
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-white/10 px-4 py-1.5 shadow-lg shadow-cyan-500/10 backdrop-blur-md">
+          <span className="h-2 w-2 rounded-full bg-cyan-400" />
+          <span className="text-xs font-medium tracking-wide text-cyan-300 sm:text-sm">
+            Full Stack Web Developer
           </span>
         </div>
 
-        {/* Name Title */}
-        <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-white max-w-4xl">
-          MD FAHIM <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500">PRODHAN</span>
+        <h1 className="max-w-5xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-7xl">
+          Md. Mahbubul Alom{" "}
+          <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent">
+            Sifat
+          </span>
         </h1>
 
-        {/* Roles & Tagline */}
-        <p className="mt-4 text-base sm:text-xl md:text-2xl text-zinc-300 max-w-2xl font-light leading-relaxed">
-          Full Stack Developer & Web Instructor building scalable <span className="text-white font-medium">Multi-Tenant SaaS</span> and high-performance interactive web apps.
+        <p className="mt-5 max-w-2xl text-base font-light leading-relaxed text-zinc-300 sm:text-xl">
+          Software Engineering student at the University of Frontier
+          Technology, Bangladesh, focused on building modern web applications
+          with React and Next.js.
         </p>
 
-        {/* Quick Tech Badges */}
-        <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-xl">
-          {["React 19", "Node.js", "Multi-Tenant SaaS", "Tailwind CSS", "GSAP"].map((tag) => (
-            <span
-              key={tag}
-              className="text-[11px] sm:text-xs px-3 py-1 rounded-full bg-black/40 border border-white/10 text-zinc-400"
-            >
-              {tag}
+        <div className="mt-5 flex flex-wrap justify-center gap-2">
+          {["React", "Next.js", "JavaScript", "TypeScript"].map((tech) => (
+            <span key={tech} className={introClass}>
+              {tech}
             </span>
           ))}
         </div>
+
+        <motion.div
+          style={{ pointerEvents: introPointer }}
+          className="mt-8 flex flex-col items-center gap-4 sm:flex-row"
+        >
+          {RESUME_URL && (
+            <ResumeButton className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-teal-400 px-7 py-3 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95" />
+          )}
+
+          <div className="flex items-center gap-3">
+            {socials.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={label === "Email" ? undefined : "_blank"}
+                rel={label === "Email" ? undefined : "noreferrer"}
+                aria-label={label}
+                title={label}
+                className="rounded-full border border-white/15 bg-white/10 p-3 text-zinc-200 backdrop-blur-md transition hover:scale-110 hover:bg-white/20 hover:text-cyan-300"
+              >
+                <Icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Initial Scroll Down Indicator */}
+      {/* Scroll prompt */}
       <motion.div
         style={{ opacity: scrollPromptOpacity }}
-        className="absolute bottom-10 z-10 flex flex-col items-center justify-center w-full pointer-events-none"
+        className="pointer-events-none absolute bottom-10 z-10 flex w-full flex-col items-center justify-center"
       >
-        <span className="text-[11px] uppercase tracking-widest text-zinc-400 mb-2 font-medium">
+        <span className="mb-2 text-[11px] font-medium uppercase tracking-widest text-zinc-400">
           Scroll to explore
         </span>
-        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1">
-          <div className="w-1.5 h-2.5 rounded-full bg-cyan-400 animate-bounce" />
+
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/20 p-1">
+          <div className="h-2.5 w-1.5 animate-bounce rounded-full bg-cyan-400" />
         </div>
       </motion.div>
 
-      {/* End of Hero CTA */}
+      {/* Calls to action */}
       <motion.div
-        style={{ opacity: ctaOpacity, y: ctaY }}
-        className="absolute bottom-16 z-10 flex flex-col sm:flex-row gap-4 w-full justify-center items-center px-4"
+        style={{
+          opacity: ctaOpacity,
+          y: ctaY,
+          pointerEvents: ctaPointer,
+        }}
+        className="absolute bottom-16 z-10 flex w-full flex-col items-center justify-center gap-4 px-4 sm:flex-row"
       >
         <a
-          href="#experience"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-teal-400 px-8 py-3.5 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95"
-        >
-          <span>Explore Experience</span>
-          <ArrowDown className="w-4 h-4" />
-        </a>
-
-        <a
           href="#projects"
-          className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-7 py-3.5 font-medium text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-105"
+          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-teal-400 px-8 py-3.5 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95"
         >
           View Projects
+        </a>
+
+        {RESUME_URL && <ResumeButton className={buttonClass} />}
+
+        <a href="#contact" className={buttonClass}>
+          Contact Me
         </a>
       </motion.div>
     </>

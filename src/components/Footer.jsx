@@ -9,13 +9,13 @@ export default function Footer() {
   };
 
   const navLinks = [
-    { name: "Experience", href: "#experience" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
-  ];
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+];
 
   return (
     <footer className="bg-zinc-950 border-t border-white/10 py-16 relative overflow-hidden">
@@ -25,14 +25,14 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-cyan-400 flex items-center justify-center font-bold text-black text-base">
-                FP
+                MS
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                MD FAHIM PRODHAN
+                MD MAHBUBUL ALOM SIFAT
               </span>
             </div>
             <p className="text-xs text-zinc-400 mt-2 max-w-sm">
-              Full Stack Developer & Software Engineer. Engineering high-performance web applications, scalable SaaS platforms & interactive user experiences.
+              Full Stack Developer & Software Engineering student at University of Frontier Technology, Bangladesh.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export default function Footer() {
           {/* Socials & Back to Top */}
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/Fahim-Prodhan"
+              href="https://github.com/MahbubSifat"
               target="_blank"
               rel="noreferrer"
               className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
@@ -62,7 +62,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="mailto:fahimprodhan0@gmail.com"
+              href="mailto:mahbubsifatbdu06@gmail.com"
               className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
               title="Email"
             >
@@ -81,9 +81,9 @@ export default function Footer() {
 
         {/* Bottom Credits */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
-          <p>© {currentYear} MD Fahim Prodhan. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} MD MAHBUBUL ALOM SIFAT. All rights reserved.</p>
           <div className="flex items-center gap-2">
-            <span>Designed & Engineered with React 19, GSAP & Tailwind CSS</span>
+            <span>Built with React, Vite, GSAP & Tailwind CSS</span>
           </div>
         </div>
       </div>
