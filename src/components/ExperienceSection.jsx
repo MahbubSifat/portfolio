@@ -59,7 +59,7 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="relative bg-black py-24">
+    <section id="experience" className="relative overflow-hidden bg-black py-24">
       <div className="pointer-events-none absolute left-0 top-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -171,10 +171,10 @@ export default function ExperienceSection() {
         {/* Transition to projects */}
         <div className="mt-16 text-center">
           <a
-            href="#projects"
+            href="#about"
             className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-7 py-3.5 text-xs font-semibold text-zinc-300 shadow-lg transition-all hover:border-cyan-400/40 hover:bg-white/10 hover:text-white sm:text-sm"
           >
-            <span>Explore My Projects</span>
+            <span>More About Me</span>
             <ArrowDown className="h-4 w-4 text-cyan-400" />
           </a>
         </div>

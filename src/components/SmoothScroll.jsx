@@ -7,6 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
+    // যাদের device-এ "reduce motion" চালু, তাদের জন্য সাধারণ scroll
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

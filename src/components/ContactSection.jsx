@@ -1,240 +1,131 @@
 import { useState } from "react";
-import { Mail, MapPin, Send } from "lucide-react";
-import { LINKS } from "../data/links";
-import { GithubIcon, LinkedinIcon } from "./Icons";
+import { Mail, Phone, MapPin, Copy, Check, MessageCircle, Send } from "lucide-react";
+import { GithubIcon, LinkedinIcon, FacebookIcon } from "./Icons";
+import SectionHeading from "./SectionHeading";
+import { LINKS, PHONE, WHATSAPP, LOCATION } from "../data/links";
+
+function ContactRow({ icon: Icon, label, children }) {
+  return (
+    <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900/60 p-4">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-400">
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs text-zinc-400">{label}</p>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormData((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(LINKS.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard পাওয়া না গেলে mailto link-টাই কাজ করবে।
+    }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const socials = [
+    { label: "GitHub", href: LINKS.github, Icon: GithubIcon },
+    { label: "LinkedIn", href: LINKS.linkedin, Icon: LinkedinIcon },
+    { label: "Facebook", href: LINKS.facebook, Icon: FacebookIcon },
+  ].filter((s) => s.href);
 
-    const recipient = LINKS.email;
-
-    const subject = encodeURIComponent(
-      formData.subject || `Portfolio inquiry from ${formData.name}`
-    );
-
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
-  };
-
-  const inputClasses =
-    "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20";
+  const subject = encodeURIComponent("Hello from your portfolio");
 
   return (
-    <section
-      id="contact"
-      className="relative px-5 py-24 sm:px-8 lg:px-12"
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Section Heading */}
-        <div className="mb-14 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            Get In Touch
-          </p>
+    <section id="contact" className="relative overflow-hidden border-t border-white/5 bg-zinc-950 py-24">
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-cyan-500/5 blur-3xl" />
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
-            Let's <span className="text-gradient">Connect</span>
-          </h2>
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading icon={Send} badge="Contact" title="Let's" accent="talk">
+          If you would like to discuss an internship, a project or a collaboration, send me an
+          email and I will reply as soon as I can.
+        </SectionHeading>
 
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
-            Have a project idea, collaboration opportunity, or just want to
-            talk about technology? Feel free to reach out.
-          </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <ContactRow icon={Mail} label="Email">
+            <div className="flex items-center justify-between gap-2">
+              <a
+                href={`mailto:${LINKS.email}?subject=${subject}`}
+                className="min-w-0 flex-1 truncate font-medium text-white hover:text-cyan-300"
+              >
+                {LINKS.email}
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                aria-label="Copy email address"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-zinc-300 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-cyan-400" /> Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" /> Copy
+                  </>
+                )}
+              </button>
+            </div>
+          </ContactRow>
+
+          {PHONE && (
+            <ContactRow icon={Phone} label="Phone">
+              <a href={`tel:${PHONE}`} className="font-medium text-white hover:text-cyan-300">
+                {PHONE}
+              </a>
+            </ContactRow>
+          )}
+
+          {WHATSAPP && (
+            <ContactRow icon={MessageCircle} label="WhatsApp">
+              <a
+                href={`https://wa.me/${WHATSAPP}`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-white hover:text-cyan-300"
+              >
+                Message on WhatsApp
+              </a>
+            </ContactRow>
+          )}
+
+          <ContactRow icon={MapPin} label="Location">
+            <p className="font-medium text-white">{LOCATION}</p>
+          </ContactRow>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* Contact Information */}
-          <div>
-            <h3 className="mb-4 text-2xl font-semibold text-white">
-              Let's start a conversation
-            </h3>
-
-            <p className="mb-8 max-w-lg leading-7 text-gray-400">
-              I'm a Software Engineering student focused on full stack web
-              development. I'm interested in learning, building useful
-              applications, and connecting with people in tech.
-            </p>
-
-            <div className="space-y-5">
-              {/* Email */}
-              <a
-                href={`mailto:${LINKS.email}`}
-                className="group flex items-center gap-4"
-              >
-                <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3">
-                  <Mail className="h-5 w-5 text-cyan-400" />
-                </div>
-
-                <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <p className="break-all text-sm text-gray-200 transition group-hover:text-cyan-400">
-                    {LINKS.email}
-                  </p>
-                </div>
-              </a>
-
-              {/* Location */}
-              <div className="flex items-center gap-4">
-                <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 p-3">
-                  <MapPin className="h-5 w-5 text-cyan-400" />
-                </div>
-
-                <div>
-                  <p className="text-sm text-gray-500">Location</p>
-                  <p className="text-sm text-gray-200">Bangladesh</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="mt-8 flex gap-3">
-              <a
-                href={LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub profile"
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-400"
-              >
-                <GithubIcon />
-              </a>
-
-              <a
-                href={LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn profile"
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-400"
-              >
-                <LinkedinIcon />
-              </a>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="glass-panel space-y-5 rounded-2xl border border-white/10 p-6 sm:p-8"
+        <div className="mt-10 flex flex-col items-center gap-6">
+          <a
+            href={`mailto:${LINKS.email}?subject=${subject}`}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-teal-400 px-8 py-3.5 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95"
           >
-            {/* Name and Email */}
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="contact-name"
-                  className="mb-2 block text-sm text-gray-300"
-                >
-                  Your Name
-                </label>
+            <Mail className="h-4 w-4" />
+            Email me
+          </a>
 
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="John Doe"
-                  autoComplete="name"
-                  className={inputClasses}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="contact-email"
-                  className="mb-2 block text-sm text-gray-300"
-                >
-                  Your Email
-                </label>
-
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="john@example.com"
-                  autoComplete="email"
-                  className={inputClasses}
-                  required
-                />
-              </div>
-            </div>
-
-            {/* Subject */}
-            <div>
-              <label
-                htmlFor="contact-subject"
-                className="mb-2 block text-sm text-gray-300"
+          <div className="flex flex-wrap justify-center gap-3">
+            {socials.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10 hover:text-cyan-300"
               >
-                Subject
-              </label>
-
-              <input
-                id="contact-subject"
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                placeholder="What would you like to discuss?"
-                className={inputClasses}
-                required
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label
-                htmlFor="contact-message"
-                className="mb-2 block text-sm text-gray-300"
-              >
-                Message
-              </label>
-
-              <textarea
-                id="contact-message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Write your message here..."
-                rows={5}
-                className={`${inputClasses} resize-y`}
-                required
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 font-semibold text-gray-950 transition hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-gray-950"
-            >
-              <Send className="h-4 w-4" />
-              Continue in Email App
-            </button>
-
-            <p className="text-center text-xs leading-5 text-gray-500">
-              Your email application will open with the message prepared.
-              You will need to send it from there.
-            </p>
-          </form>
+                <Icon className="h-4 w-4" />
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -10,25 +10,45 @@ export default function ScrollSequence({
   name,
   frameCount,
   scrollLength = 4000,
+  lazy = false, // true হলে section কাছাকাছি এলে তবেই frame load শুরু হয়
   children, // (progress) => JSX
 }) {
+  const rootRef = useRef(null);
   const wrapRef = useRef(null);
   const canvasRef = useRef(null);
   const imagesRef = useRef([]);
-  const [folder, setFolder] = useState(null);
+  const [folder] = useState(() => (window.innerWidth < 768 ? `${name}-sm` : name));
+  const [started, setStarted] = useState(
+    () => !lazy || typeof IntersectionObserver === "undefined"
+  );
   const [loadedCount, setLoadedCount] = useState(0);
   const loaded = loadedCount === frameCount;
 
   const progress = useMotionValue(0);
 
   useEffect(() => {
-    setFolder(window.innerWidth < 768 ? `${name}-sm` : name);
-  }, [name]);
+    if (started) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "3000px 0px" }
+    );
+    io.observe(rootRef.current);
+    // Hero আগে load হোক, তারপর অল্প পরে পেছনে বসে এই sequence-ও load হবে
+    const timer = setTimeout(() => setStarted(true), 2500);
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+    };
+  }, [started]);
 
   useEffect(() => {
-    if (!folder) return;
+    if (!started) return;
     let cancelled = false;
-    setLoadedCount(0);
     imagesRef.current = Array.from({ length: frameCount }, (_, i) => {
       const img = new Image();
       img.src = `/frames/${folder}/frame_${String(i + 1).padStart(4, "0")}.webp`;
@@ -38,7 +58,7 @@ export default function ScrollSequence({
     return () => {
       cancelled = true;
     };
-  }, [folder, frameCount]);
+  }, [folder, frameCount, started]);
 
   const draw = (index) => {
     const canvas = canvasRef.current;
@@ -95,6 +115,8 @@ export default function ScrollSequence({
   );
 
   return (
+    // বাইরের div আগে থেকেই pin-এর জায়গা ধরে রাখে, তাই frame load হলে নিচের অংশ লাফায় না
+    <div ref={rootRef} style={{ minHeight: `calc(100vh + ${scrollLength}px)` }}>
     <section
       ref={wrapRef}
       className="relative h-screen w-full overflow-hidden bg-black"
@@ -112,5 +134,6 @@ export default function ScrollSequence({
 
       {children?.(progress)}
     </section>
+    </div>
   );
 }

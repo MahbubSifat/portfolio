@@ -1,61 +1,41 @@
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import SmoothScroll from "./components/SmoothScroll";
-import ScrollSequence from "./components/ScrollSequence";
-import HeroContent from "./components/HeroContent";
-import AboutContent from "./components/AboutContent";
 import Navbar from "./components/Navbar";
-
-// import StatsSection from "./components/StatsSection";
-import ExperienceSection from "./components/ExperienceSection";
-import SkillsSection from "./components/SkillsSection";
-import ProjectsSection from "./components/ProjectsSection";
-// import ServicesSection from "./components/ServicesSection";
-import ContactSection from "./components/ContactSection";
+import ScrollProgress from "./components/ScrollProgress";
+import BackToTop from "./components/BackToTop";
 import Footer from "./components/Footer";
-import AboutSection from "./components/AboutSection";
-import EducationSection from "./components/EducationSection";
+import Home from "./pages/Home";
+import ProjectDetail from "./pages/ProjectDetail";
+import NotFound from "./pages/NotFound";
+
+// Page বদলালে (hash ছাড়া) একদম উপরে নিয়ে যায়।
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) return;
+    if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+}
 
 export default function App() {
   return (
     <SmoothScroll>
       <div className="relative bg-black text-white selection:bg-cyan-400 selection:text-black">
-        {/* Navigation Bar */}
+        <ScrollToTop />
+        <ScrollProgress />
         <Navbar />
 
-        {/* 1. Hero Canvas Sequence */}
-        <div id="hero" className="relative">
-          <ScrollSequence name="hero" frameCount={96} scrollLength={2800}>
-            {(progress) => <HeroContent progress={progress} />}
-          </ScrollSequence>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
 
-        {/* 2. Key Metrics & Impact
-        <StatsSection /> */}
-
-
-        {/* 4. About Canvas Sequence (Moved after Work Experience) */}
-        <div id="about" className="relative">
-          <ScrollSequence name="about" frameCount={192} scrollLength={3500}>
-            {(progress) => <AboutContent progress={progress} />}
-          </ScrollSequence>
-        </div>
-
-        {/* 5. Technical Stack & Skills */}
-        <SkillsSection />
-
-        {/* 3. Work Experience & Leadership */}
-        <ExperienceSection />
-
-        {/* 6. Featured Projects */}
-        <ProjectsSection />
-
-        {/* 7. Solutions & Services
-        <ServicesSection /> */}
-
-        {/* 8. Contact & Inquiry */}
-        <ContactSection />
-
-        {/* 9. Footer */}
         <Footer />
+        <BackToTop />
       </div>
     </SmoothScroll>
   );

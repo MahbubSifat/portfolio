@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import { ABOUT, PROFILE_PHOTO, QUICK_FACTS } from "../data/about";
 
 export default function AboutSection() {
@@ -11,18 +12,7 @@ export default function AboutSection() {
   return (
     <section id="about-me" className="py-24 bg-black relative border-t border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
-            <User className="w-3.5 h-3.5" />
-            About Me
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Get to{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">
-              know me
-            </span>
-          </h2>
-        </div>
+        <SectionHeading icon={User} badge="About Me" title="Get to" accent="know me" />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
           <div className="lg:col-span-2 space-y-5 text-zinc-300 leading-relaxed text-base sm:text-lg">

@@ -16,6 +16,10 @@ export default function AboutContent({ progress }) {
 
   return (
     <>
+      {/* লেখা পড়া সহজ করার জন্য বাঁ দিকে আর নিচে হালকা ছায়া */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent md:via-black/30" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 to-transparent" />
+
       {/* Slide 1: Mission Headline */}
       <motion.div
         style={{ opacity: headOpacity, y: headY }}
@@ -50,8 +54,8 @@ export default function AboutContent({ progress }) {
         </p>
         <div className="mt-5 flex flex-wrap gap-2 text-xs text-zinc-400">
           <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Full Stack Direction</span>
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">React & Node.js</span>
-          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Learning Android development</span>
+          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">React & Next.js</span>
+          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg">Learning Flutter</span>
         </div>
       </motion.div>
 
@@ -65,14 +69,14 @@ export default function AboutContent({ progress }) {
             Dive Deeper
           </p>
           <h4 className="text-xl sm:text-2xl font-bold text-white">
-            Explore Skills, Learning & Featured Projects
+            Explore Skills & Featured Projects
           </h4>
         </div>
         <a
           href="#skills"
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 px-8 py-3.5 font-bold text-black shadow-lg shadow-cyan-500/25 transition hover:scale-105 active:scale-95"
         >
-          <span>Explore Skills & Learning</span>
+          <span>Explore Skills</span>
           <ArrowDown className="w-4 h-4" />
         </a>
       </motion.div>
